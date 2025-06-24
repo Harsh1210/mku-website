@@ -36,7 +36,7 @@ export default function Home() {
                 </Button>
               </Link>
               <Link href="/about">
-                <Button variant="outline" size="lg" className="border-2 border-white text-white hover:bg-white hover:text-forest-green px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <Button size="lg" className="bg-white text-forest-green border-2 border-white hover:bg-lime-green hover:text-white hover:border-lime-green px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                   {t('hero.cta_secondary')}
                 </Button>
               </Link>
@@ -63,49 +63,52 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="text-center p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 bg-gradient-to-br from-white to-mint-green/20 hover:scale-105">
-              <CardContent className="pt-6">
-                <div className="w-16 h-16 bg-sage-green bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
-                  <Handshake className="text-2xl text-sage-green h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold text-forest-green mb-4">
-                  {t('value_prop.direct_farmers.title')}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {t('value_prop.direct_farmers.description')}
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 bg-gradient-to-br from-white to-lime-green/20 hover:scale-105">
-              <CardContent className="pt-6">
-                <div className="w-16 h-16 bg-lime-green bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
-                  <Award className="text-2xl text-lime-green h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold text-forest-green mb-4">
-                  {t('value_prop.premium_processing.title')}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {t('value_prop.premium_processing.description')}
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 bg-gradient-to-br from-white to-eucalyptus-green/20 hover:scale-105">
-              <CardContent className="pt-6">
-                <div className="w-16 h-16 bg-forest-green bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
-                  <Leaf className="text-2xl text-forest-green h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold text-forest-green mb-4">
-                  {t('value_prop.sustainable_practices.title')}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {t('value_prop.sustainable_practices.description')}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
+<div className="grid md:grid-cols-3 gap-8">
+  <Card className="text-center p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 bg-gradient-to-br from-white to-mint-green/20 hover:scale-105">
+    <CardContent className="pt-6">
+      <div className="w-16 h-16 bg-sage-green bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+        {/* Corrected: Changed text-sage-green to text-forest-green for contrast */}
+        <Handshake className="text-2xl text-forest-green h-8 w-8" />
+      </div>
+      <h3 className="text-xl font-semibold text-forest-green mb-4">
+        {t('value_prop.direct_farmers.title')}
+      </h3>
+      <p className="text-gray-600 leading-relaxed">
+        {t('value_prop.direct_farmers.description')}
+      </p>
+    </CardContent>
+  </Card>
+  
+  <Card className="text-center p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 bg-gradient-to-br from-white to-lime-green/20 hover:scale-105">
+    <CardContent className="pt-6">
+      <div className="w-16 h-16 bg-lime-green bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+        {/* Corrected: Changed text-lime-green to text-forest-green for contrast */}
+        <Award className="text-2xl text-forest-green h-8 w-8" />
+      </div>
+      <h3 className="text-xl font-semibold text-forest-green mb-4">
+        {t('value_prop.premium_processing.title')}
+      </h3>
+      <p className="text-gray-600 leading-relaxed">
+        {t('value_prop.premium_processing.description')}
+      </p>
+    </CardContent>
+  </Card>
+  
+  <Card className="text-center p-8 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 bg-gradient-to-br from-white to-eucalyptus-green/20 hover:scale-105">
+    <CardContent className="pt-6">
+      <div className="w-16 h-16 bg-forest-green bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-md">
+        {/* Corrected: Changed text-forest-green to text-white for contrast */}
+        <Leaf className="text-2xl text-white h-8 w-8" />
+      </div>
+      <h3 className="text-xl font-semibold text-forest-green mb-4">
+        {t('value_prop.sustainable_practices.title')}
+      </h3>
+      <p className="text-gray-600 leading-relaxed">
+        {t('value_prop.sustainable_practices.description')}
+      </p>
+    </CardContent>
+  </Card>
+</div>
         </div>
       </section>
 
@@ -133,7 +136,7 @@ export default function Home() {
             
             <div className="relative">
               <img 
-                src="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                src="https://sadabahaar-167866605.imgix.net/about-mku.png?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                 alt="Indian farmers working in grain fields" 
                 className="rounded-xl shadow-lg w-full h-auto"
               />
@@ -195,13 +198,15 @@ export default function Home() {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gradient-to-br from-forest-green to-sage-green">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-white mb-4">
+            {/* Corrected: Text color changed for visibility on white background */}
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-4">
               {t('process.title')}
             </h2>
-            <p className="text-xl text-gray-200 max-w-3xl mx-auto">
+            {/* Corrected: Text color changed for visibility on white background */}
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               {t('process.subtitle')}
             </p>
           </div>
@@ -211,32 +216,40 @@ export default function Home() {
               <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <Sprout className="text-3xl text-lime-green h-10 w-10" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">1. {t('process.sourcing.title')}</h3>
-              <p className="text-gray-200">{t('process.sourcing.description')}</p>
+              {/* Corrected: Text color changed */}
+              <h3 className="text-xl font-semibold text-forest-green mb-4">1. {t('process.sourcing.title')}</h3>
+              {/* Corrected: Text color changed */}
+              <p className="text-gray-600">{t('process.sourcing.description')}</p>
             </div>
             
             <div className="text-center">
               <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <ServerCog className="text-3xl text-lime-green h-10 w-10" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">2. {t('process.processing.title')}</h3>
-              <p className="text-gray-200">{t('process.processing.description')}</p>
+              {/* Corrected: Text color changed */}
+              <h3 className="text-xl font-semibold text-forest-green mb-4">2. {t('process.processing.title')}</h3>
+              {/* Corrected: Text color changed */}
+              <p className="text-gray-600">{t('process.processing.description')}</p>
             </div>
             
             <div className="text-center">
               <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <Microscope className="text-3xl text-lime-green h-10 w-10" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">3. {t('process.testing.title')}</h3>
-              <p className="text-gray-200">{t('process.testing.description')}</p>
+              {/* Corrected: Text color changed */}
+              <h3 className="text-xl font-semibold text-forest-green mb-4">3. {t('process.testing.title')}</h3>
+              {/* Corrected: Text color changed */}
+              <p className="text-gray-600">{t('process.testing.description')}</p>
             </div>
             
             <div className="text-center">
               <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <Truck className="text-3xl text-lime-green h-10 w-10" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-4">4. {t('process.delivery.title')}</h3>
-              <p className="text-gray-200">{t('process.delivery.description')}</p>
+              {/* Corrected: Text color changed */}
+              <h3 className="text-xl font-semibold text-forest-green mb-4">4. {t('process.delivery.title')}</h3>
+              {/* Corrected: Text color changed */}
+              <p className="text-gray-600">{t('process.delivery.description')}</p>
             </div>
           </div>
         </div>

@@ -82,32 +82,35 @@ export default function Contact() {
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-sage-green bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="text-sage-green h-6 w-6" />
-                  </div>
+                    {/* Corrected: Changed text-sage-green to text-forest-green for contrast */}
+                    <MapPin className="text-forest-green h-6 w-6" />
+                </div>
                   <div>
                     <h4 className="font-semibold text-forest-green mb-1">{t('contact.address')}</h4>
                     <p className="text-gray-600">
-                      123 Agricultural Hub<br />
-                      Rural Development Zone<br />
-                      Maharashtra, India - 123456
+                      Gat no. 795<br />
+                      Parola Road, Amalner<br />
+                      Maharashtra, India - 425401
                     </p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-lime-green bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Phone className="text-lime-green h-6 w-6" />
+                      {/* Corrected: Changed text-lime-green to text-forest-green for contrast */}
+                      <Phone className="text-forest-green h-6 w-6" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-forest-green mb-1">{t('contact.phone')}</h4>
-                    <p className="text-gray-600">+91 98765 43210</p>
+                    <p className="text-gray-600">+91 98104 00225</p>
                     <p className="text-gray-600">+91 87654 32109</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-forest-green bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <Mail className="text-forest-green h-6 w-6" />
+                    {/* Corrected: Changed text-forest-green to text-white for contrast */}
+                    <Mail className="text-white h-6 w-6" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-forest-green mb-1">{t('contact.email')}</h4>

@@ -59,33 +59,41 @@ export default function Products() {
       </section>
 
       {/* Quality Assurance */}
-      <section className="py-20 bg-gradient-to-br from-forest-green to-sage-green">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-white mb-6">
-            Quality Assurance Promise
-          </h2>
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto mb-8">
-            Every product goes through rigorous quality checks to ensure you receive only the finest grains
-          </p>
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
-            <div className="text-center">
-              <div className="text-3xl mb-4">🌾</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Premium Sourcing</h3>
-              <p className="text-gray-200">Directly sourced from verified farms</p>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-4">🔬</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Lab Tested</h3>
-              <p className="text-gray-200">Rigorous quality and purity testing</p>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl mb-4">📦</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Fresh Packaging</h3>
-              <p className="text-gray-200">Sealed for maximum freshness</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="py-20 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    {/* Corrected: Text color changed */}
+    <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-6">
+      Quality Assurance Promise
+    </h2>
+    {/* Corrected: Text color changed */}
+    <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+      Every product goes through rigorous quality checks to ensure you receive only the finest grains
+    </p>
+    <div className="grid md:grid-cols-3 gap-8 mt-12">
+      <div className="text-center">
+        <div className="text-3xl mb-4">🌾</div>
+        {/* Corrected: Text color changed */}
+        <h3 className="text-xl font-semibold text-forest-green mb-2">Premium Sourcing</h3>
+        {/* Corrected: Text color changed */}
+        <p className="text-gray-600">Directly sourced from verified farms</p>
+      </div>
+      <div className="text-center">
+        <div className="text-3xl mb-4">🔬</div>
+        {/* Corrected: Text color changed */}
+        <h3 className="text-xl font-semibold text-forest-green mb-2">Lab Tested</h3>
+        {/* Corrected: Text color changed */}
+        <p className="text-gray-600">Rigorous quality and purity testing</p>
+      </div>
+      <div className="text-center">
+        <div className="text-3xl mb-4">📦</div>
+        {/* Corrected: Text color changed */}
+        <h3 className="text-xl font-semibold text-forest-green mb-2">Fresh Packaging</h3>
+        {/* Corrected: Text color changed */}
+        <p className="text-gray-600">Sealed for maximum freshness</p>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 }
