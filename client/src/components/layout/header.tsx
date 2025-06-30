@@ -42,6 +42,11 @@ export function Header() {
           <div className="flex items-center">
             <Link href="/">
               <span className="flex-shrink-0 flex items-center cursor-pointer">
+                <img
+                  src="https://sadabahaar-167866605.imgix.net/mku-logo.png?auto=format&w=60&h=60"
+                  alt="Mohan Krushi Udyog Logo"
+                  className="h-8 w-8 mr-2"
+                   />
                 <span className="text-xl lg:text-2xl font-playfair font-bold text-forest-green">
                   Mohan Krushi Udyog
                 </span>
