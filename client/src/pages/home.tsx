@@ -5,12 +5,13 @@ import { Badge } from '@/components/ui/badge';
 import { Handshake, Award, Leaf, Sprout, ServerCog, Microscope, Truck, Star, ArrowRight, Quote } from 'lucide-react';
 import { Link } from 'wouter';
 import { products, blogPosts, testimonials, type Testimonial } from '@/data/static-data';
+import React, { useState } from 'react';
 
 export default function Home() {
   const { t, i18n } = useTranslation();
   const isHindi = i18n.language === 'hi';
 
-  const featuredProducts = products.filter(product => product.featured);
+  const featuredProducts = products.filter(product => product.featured).slice(0, 4);
   const featuredBlogPosts = blogPosts.filter(post => post.featured);
 
   return (
@@ -48,6 +49,32 @@ export default function Home() {
         <div className="absolute bottom-8 right-8 bg-white bg-opacity-90 px-6 py-3 rounded-full flex items-center space-x-3">
           <Star className="text-lime-green h-5 w-5" />
           <span className="font-semibold text-forest-green">{t('hero.made_in_india')}</span>
+        </div>
+      </section>
+
+      {/* Featured Products (moved up) */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-4">
+              {t('products.title')}
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t('products.subtitle')}
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} isHindi={isHindi} t={t} />
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Link href="/products">
+              <Button className="bg-forest-green text-white hover:bg-forest-green/90 px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                {t('products.view_catalog')}
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -201,162 +228,117 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-4">
-              {t('products.title')}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t('products.subtitle')}
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {featuredProducts.map((product) => (
-              <Card key={product.id} className="bg-gradient-to-br from-white to-mint-green/10 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 hover:scale-105">
-                <CardContent className="p-6">
-                  <img 
-                    src={product.image || ''} 
-                    alt={isHindi ? product.nameHi || product.name : product.name} 
-                    className="w-full h-48 object-cover rounded-xl mb-4 shadow-md"
-                  />
-                  <h3 className="text-xl font-semibold text-forest-green mb-2">
-                    {isHindi ? product.nameHi || product.name : product.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4">
-                    {isHindi ? product.descriptionHi || product.description : product.description}
-                  </p>
-                  <Badge variant="secondary" className="text-lime-green bg-lime-green/20 rounded-full">
-                    <Star className="h-3 w-3 mr-1" />
-                    {isHindi ? product.badgeHi || product.badge : product.badge}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <Link href="/products">
-              <Button className="bg-forest-green text-white hover:bg-forest-green/90 px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                {t('products.view_catalog')}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            {/* Corrected: Text color changed for visibility on white background */}
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-4">
-              {t('process.title')}
-            </h2>
-            {/* Corrected: Text color changed for visibility on white background */}
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t('process.subtitle')}
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Sprout className="text-3xl text-lime-green h-10 w-10" />
-              </div>
-              {/* Corrected: Text color changed */}
-              <h3 className="text-xl font-semibold text-forest-green mb-4">1. {t('process.sourcing.title')}</h3>
-              {/* Corrected: Text color changed */}
-              <p className="text-gray-600">{t('process.sourcing.description')}</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <ServerCog className="text-3xl text-lime-green h-10 w-10" />
-              </div>
-              {/* Corrected: Text color changed */}
-              <h3 className="text-xl font-semibold text-forest-green mb-4">2. {t('process.processing.title')}</h3>
-              {/* Corrected: Text color changed */}
-              <p className="text-gray-600">{t('process.processing.description')}</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Microscope className="text-3xl text-lime-green h-10 w-10" />
-              </div>
-              {/* Corrected: Text color changed */}
-              <h3 className="text-xl font-semibold text-forest-green mb-4">3. {t('process.testing.title')}</h3>
-              {/* Corrected: Text color changed */}
-              <p className="text-gray-600">{t('process.testing.description')}</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-20 h-20 bg-white bg-opacity-30 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <Truck className="text-3xl text-lime-green h-10 w-10" />
-              </div>
-              {/* Corrected: Text color changed */}
-              <h3 className="text-xl font-semibold text-forest-green mb-4">4. {t('process.delivery.title')}</h3>
-              {/* Corrected: Text color changed */}
-              <p className="text-gray-600">{t('process.delivery.description')}</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Blog Posts */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-4">
-              {t('blog.title')}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {t('blog.subtitle')}
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {featuredBlogPosts.slice(0, 3).map((post) => (
-              <Card key={post.id} className="bg-white hover:shadow-xl transition-all duration-500 overflow-hidden rounded-2xl border-0 hover:scale-105">
-                <CardContent className="p-0">
-                  <img 
-                    src={post.image || ''} 
-                    alt={isHindi ? post.titleHi || post.title : post.title} 
-                    className="w-full h-48 object-cover"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-center text-sm text-gray-500 mb-3">
-                      <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
-                      <span className="mx-2">•</span>
-                      <span>{isHindi ? post.categoryHi || post.category : post.category}</span>
-                    </div>
-                    <h3 className="text-xl font-semibold text-forest-green mb-3 hover:text-sage-green transition-colors">
-                      {isHindi ? post.titleHi || post.title : post.title}
-                    </h3>
-                    <p className="text-gray-600 mb-4">
-                      {isHindi ? post.excerptHi || post.excerpt : post.excerpt}
-                    </p>
-                    <Link href="/blog">
-                      <a className="text-lime-green font-medium hover:text-forest-green transition-colors">
-                        {t('blog.read_more')} <ArrowRight className="inline ml-2 h-4 w-4" />
-                      </a>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <Link href="/blog">
-              <Button className="bg-forest-green text-white hover:bg-forest-green/90 px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-                {t('blog.view_all')}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ...existing code... */}
     </div>
+  );
+}
+
+function ProductCard({ product, isHindi, t }: any) {
+  const [mediaIndex, setMediaIndex] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
+  const media = [...(product.images || []), ...(product.video ? [product.video] : [])];
+  const isVideo = (url: string) => url.endsWith('.mp4') || url.includes('youtube.com') || url.includes('vimeo.com');
+  const handlePrev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setMediaIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
+  };
+  const handleNext = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setMediaIndex((prev) => (prev === media.length - 1 ? 0 : prev + 1));
+  };
+
+  return (
+    <>
+      <Card className="bg-gradient-to-br from-white to-mint-green/10 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 hover:scale-105 group relative">
+        <CardContent className="p-6">
+          <div className="relative mb-4 cursor-pointer" onClick={() => setModalOpen(true)}>
+            {media.length > 1 && (
+              <>
+                <button
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-1 shadow hover:bg-opacity-100 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={handlePrev}
+                  aria-label="Previous"
+                >
+                  &#8592;
+                </button>
+                <button
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-1 shadow hover:bg-opacity-100 z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                  onClick={handleNext}
+                  aria-label="Next"
+                >
+                  &#8594;
+                </button>
+              </>
+            )}
+            {isVideo(media[mediaIndex]) ? (
+              <video
+                src={media[mediaIndex]}
+                controls
+                className="w-full h-48 object-cover rounded-xl mb-4 shadow-md"
+                onClick={e => { e.stopPropagation(); setModalOpen(true); }}
+              />
+            ) : (
+              <img
+                src={media[mediaIndex]}
+                alt={isHindi ? product.nameHi || product.name : product.name}
+                className="w-full h-48 object-cover rounded-xl mb-4 shadow-md"
+              />
+            )}
+          </div>
+          <h3 className="text-xl font-semibold text-forest-green mb-2">
+            {isHindi ? product.nameHi || product.name : product.name}
+          </h3>
+          <p className="text-gray-600 text-sm mb-4">
+            {isHindi ? product.descriptionHi || product.description : product.description}
+          </p>
+          <Badge variant="secondary" className="text-lime-green bg-lime-green/20 rounded-full">
+            <Star className="h-3 w-3 mr-1" />
+            {isHindi ? product.badgeHi || product.badge : product.badge}
+          </Badge>
+        </CardContent>
+      </Card>
+      {/* Modal for fullscreen image/video */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80" onClick={() => setModalOpen(false)}>
+          <div className="relative max-w-3xl w-full flex flex-col items-center" onClick={e => e.stopPropagation()}>
+            <button className="absolute top-4 right-4 text-white text-2xl" onClick={() => setModalOpen(false)}>&times;</button>
+            <div className="w-full flex items-center justify-center relative">
+              {media.length > 1 && (
+                <>
+                  <button
+                    className="absolute left-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow hover:bg-opacity-100 z-10"
+                    onClick={handlePrev}
+                    aria-label="Previous"
+                  >
+                    &#8592;
+                  </button>
+                  <button
+                    className="absolute right-0 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow hover:bg-opacity-100 z-10"
+                    onClick={handleNext}
+                    aria-label="Next"
+                  >
+                    &#8594;
+                  </button>
+                </>
+              )}
+              {isVideo(media[mediaIndex]) ? (
+                <video
+                  src={media[mediaIndex]}
+                  controls
+                  autoPlay
+                  className="max-h-[80vh] rounded-xl shadow-lg"
+                />
+              ) : (
+                <img
+                  src={media[mediaIndex]}
+                  alt={isHindi ? product.nameHi || product.name : product.name}
+                  className="max-h-[80vh] rounded-xl shadow-lg"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -86,7 +86,8 @@ export interface Product {
   descriptionHi: string | null;
   category: string;
   categoryHi: string | null;
-  image: string | null;
+  images: string[]; // Changed from image: string | null to images: string[]
+  video?: string;   // Optional video URL
   badge: string | null;
   badgeHi: string | null;
   featured: boolean | null;
@@ -95,56 +96,208 @@ export interface Product {
 export const products: Product[] = [
   {
     id: 1,
-    name: "Premium Rice",
-    nameHi: "प्रीमियम चावल",
-    description: "Basmati, Jasmine, and traditional varieties processed to perfection.",
-    descriptionHi: "बासमती, चमेली और पारंपरिक किस्में पूर्णता के साथ प्रसंस्कृत।",
-    category: "Rice",
-    categoryHi: "चावल",
-    image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    badge: "Premium Grade",
-    badgeHi: "प्रीमियम ग्रेड",
-    featured: true,
+    name: "Chana Chapa Gold",
+    nameHi: "चना छापा गोल्ड",
+    description: "Premium quality chickpeas known for their rich flavor and nutritional value.",
+    descriptionHi: "अपनी समृद्ध स्वाद और पोषण मूल्य के लिए जाने जाने वाले प्रीमियम गुणवत्ता वाले चने।",
+    category: "Chana",
+    categoryHi: "चना",
+    images: [
+      "https://sadabahaar-167866605.imgix.net/chapa-chana-gold.jpg",
+      "https://sadabahaar-167866605.imgix.net/chana-chapa-gold-2.jpg"
+    ],
+    video: "https://www.w3schools.com/html/mov_bbb.mp4",
+    badge: "Best Seller",
+    badgeHi: "सबसे ज्यादा बिकने वाला",
+    featured: true
   },
   {
-    id: 2,
-    name: "Wheat & Flour",
-    nameHi: "गेहूं और आटा",
-    description: "Whole wheat flour and specialty flours milled fresh daily.",
-    descriptionHi: "साबुत गेहूं का आटा और विशेषता आटा दैनिक रूप से ताजा पिसा हुआ।",
-    category: "Wheat",
-    categoryHi: "गेहूं",
-    image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    badge: "Fresh Milled",
-    badgeHi: "ताजा पिसा हुआ",
-    featured: true,
-  },
+  id: 2,
+  name: "Chana Chapa Red",
+  nameHi: "चना छापा रेड",
+  description: "A special variety of red chickpeas, offering a unique, earthy flavor and a firm texture.",
+  descriptionHi: "लाल चने की एक विशेष किस्म, जो एक अनूठा, मिट्टी जैसा स्वाद और दृढ़ बनावट प्रदान करती है।",
+  category: "Chana",
+  categoryHi: "चना",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/chapa-chana-red.jpg",
+    "https://images.unsplash.com/photo-1598912384963-3467e23a1e43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "New Arrival",
+  badgeHi: "नया आगमन",
+  featured: true
+},
+{
+  id: 3,
+  name: "Chana Chapa Blue",
+  nameHi: "चना छापा ब्लू",
+  description: "An exotic and rare variety of chickpeas with a subtle bluish hue, perfect for gourmet recipes.",
+  descriptionHi: "एक दुर्लभ और अनोखी किस्म के चने, जिनमें हल्का नीला रंग होता है, जो विशेष व्यंजनों के लिए एकदम सही हैं।",
+  category: "Chana",
+  categoryHi: "चना",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/chapa-chana-blue.jpg",
+    "https.images.unsplash.com/photo-1615732692693-945789f829a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Limited Edition",
+  badgeHi: "सीमित संस्करण",
+  featured: true
+},
+{
+  id: 4,
+  name: "Kabuli Chana Green",
+  nameHi: "काबुली चना ग्रीन",
+  description: "Fresh and tender green Kabuli chickpeas, harvested young for a sweeter taste. Perfect for snacking or light, healthy meals.",
+  descriptionHi: "ताज़े और कोमल हरे काबुली चने, जिन्हें मीठे स्वाद के लिए कच्चा तोड़ा जाता है। स्नैकिंग या हल्के, स्वस्थ भोजन के लिए बिल्कुल सही।",
+  category: "Kabuli Chana",
+  categoryHi: "काबुली चना",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/kabuli-chana-green.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1627417533379-b1d556a00f86?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Farm Fresh",
+  badgeHi: "खेत से ताज़ा",
+  featured: true
+},
+{
+  id: 5,
+  name: "Kabuli Maxico",
+  nameHi: "काबुली मेक्सिको",
+  description: "Extra-large Kabuli chickpeas sourced from Mexico, known for their superior size and creamy texture. The ultimate choice for authentic hummus.",
+  descriptionHi: "मेक्सिको से प्राप्त अतिरिक्त-बड़े काबुली चने, जो अपने बेहतर आकार और मलाईदार बनावट के लिए जाने जाते हैं। प्रामाणिक हम्मस के लिए अंतिम विकल्प।",
+  category: "Kabuli Chana",
+  categoryHi: "काबुली चना",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/kabuli-maxico-gold.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1601314210663-715c0b4153d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Jumbo Size",
+  badgeHi: "जंबो आकार",
+  featured: true
+},
   {
-    id: 3,
-    name: "Pulses & Lentils",
-    nameHi: "दालें और मसूर",
-    description: "Complete range of dal varieties, cleaned and sorted meticulously.",
-    descriptionHi: "दाल की पूरी श्रृंखला, सावधानीपूर्वक साफ और छांटी गई।",
-    category: "Pulses",
-    categoryHi: "दाल",
-    image: "https://images.unsplash.com/photo-1596797038530-2c107229654b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    badge: "Hand Sorted",
-    badgeHi: "हाथ से छांटा गया",
-    featured: false,
-  },
-  {
-    id: 4,
-    name: "Specialty Grains",
-    nameHi: "विशेष अनाज",
-    description: "Millets, quinoa, and ancient grains for health-conscious families.",
-    descriptionHi: "स्वास्थ्य सचेत परिवारों के लिए बाजरा, क्विनोआ और प्राचीन अनाज।",
-    category: "Specialty",
-    categoryHi: "विशेषता",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
-    badge: "Organic",
-    badgeHi: "जैविक",
-    featured: true,
-  },
+  id: 6,
+  name: "Kabuli Chana Red",
+  nameHi: "काबुली चना रेड",
+  description: "A vibrant red variety of Kabuli chana, prized for its rich, nutty flavor and firm texture, ideal for salads and curries.",
+  descriptionHi: "काबुली चने की एक जीवंत लाल किस्म, जो अपने समृद्ध, पौष्टिक स्वाद और दृढ़ बनावट के लिए जानी जाती है, सलाद और करी के लिए आदर्श है।",
+  category: "Kabuli Chana",
+  categoryHi: "काबुली चना",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/kabuli-chana-red.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1598912384963-3467e23a1e43?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "High Protein",
+  badgeHi: "उच्च प्रोटीन",
+  featured: true
+},
+{
+  id: 7,
+  name: "Kabuli Chana Orange",
+  nameHi: "काबुली चना ऑरेंज",
+  description: "A rare orange-hued Kabuli chana with a mildly sweet flavor profile. Adds beautiful color and nutrition to any dish.",
+  descriptionHi: "एक दुर्लभ नारंगी रंग का काबुली चना जिसमें हल्का मीठा स्वाद होता है। किसी भी व्यंजन में सुंदर रंग और पोषण जोड़ता है।",
+  category: "Kabuli Chana",
+  categoryHi: "काबुली चना",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/kabuli-chana-orange.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1615485338933-315c54467c69?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Exotic Variety",
+  badgeHi: "विदेशी किस्म",
+  featured: false
+},
+{
+  id: 8,
+  name: "Rajma Orange",
+  nameHi: "राजमा ऑरेंज",
+  description: "A unique orange-colored kidney bean with a smooth, buttery texture that absorbs flavors beautifully in slow-cooked dishes.",
+  descriptionHi: "एक अनोखा नारंगी रंग का राजमा जिसमें एक चिकनी, मक्खन जैसी बनावट होती है जो धीरे-धीरे पके हुए व्यंजनों में स्वाद को खूबसूरती से सोख लेती है।",
+  category: "Rajma",
+  categoryHi: "राजमा",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/rajma-orange.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1607616611348-7d5d2838c64f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "New Flavor",
+  badgeHi: "नया स्वाद",
+  featured: false
+},
+{
+  id: 9,
+  name: "Rajma Gold",
+  nameHi: "राजमा गोल्ड",
+  description: "Premium, golden-hued kidney beans known for their rich taste and creamy consistency, perfect for making an exquisite Rajma Masala.",
+  descriptionHi: "प्रीमियम, सुनहरे रंग का राजमा जो अपने समृद्ध स्वाद और मलाईदार स्थिरता के लिए जाना जाता है, एक उत्तम राजमा मसाला बनाने के लिए बिल्कुल उपयुक्त है।",
+  category: "Rajma",
+  categoryHi: "राजमा",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/rajma-gold.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1547496614-54737a7b8232?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Premium Quality",
+  badgeHi: "प्रीमियम गुणवत्ता",
+  featured: true
+},
+{
+  id: 10,
+  name: "Urad Light Green",
+  nameHi: "उड़द हल्का हरा",
+  description: "Split and husked light green urad dal, offering a mild flavor and soft texture. Cooks quickly and is easy to digest.",
+  descriptionHi: "छिलके वाली हल्की हरी उड़द की दाल, जो हल्का स्वाद और नरम बनावट प्रदान करती है। जल्दी पक जाती है और पचाने में आसान होती है।",
+  category: "Urad",
+  categoryHi: "उड़द",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/urad-light-green.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1594282436458-755a18a93e24?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Easy to Cook",
+  badgeHi: "पकाने में आसान",
+  featured: true
+},
+{
+  id: 11,
+  name: "Urad Dark Green",
+  nameHi: "उड़द गहरा हरा",
+  description: "Whole dark green urad beans with the skin on, delivering a robust, earthy flavor and high nutritional value. Ideal for authentic Dal Makhani.",
+  descriptionHi: "छिलके सहित साबुत गहरे हरे उड़द की दाल, जो एक मजबूत, मिट्टी जैसा स्वाद और उच्च पोषण मूल्य प्रदान करती है। प्रामाणिक दाल मखनी के लिए आदर्श।",
+  category: "Urad",
+  categoryHi: "उड़द",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/urad-dark-green.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1570479204278-f791552a4a77?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Rich & Earthy",
+  badgeHi: "समृद्ध और मिट्टी जैसा",
+  featured: true
+},
+{
+  id: 12,
+  name: "Urad Pink",
+  nameHi: "उड़द गुलाबी",
+  description: "A rare and beautiful pink-skinned urad dal, known for its delicate flavor and creamy texture. A perfect choice for unique culinary creations.",
+  descriptionHi: "एक दुर्लभ और सुंदर गुलाबी छिलके वाली उड़द की दाल, जो अपने नाजुक स्वाद और मलाईदार बनावट के लिए जानी जाती है। अद्वितीय पाक कृतियों के लिए एक आदर्श विकल्प।",
+  category: "Urad",
+  categoryHi: "उड़द",
+  images: [
+    "https://sadabahaar-167866605.imgix.net/urad-pink.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300",
+    "https://images.unsplash.com/photo-1595462589921-2a1e1d3b2dc4?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300"
+  ],
+  video: "https://www.w3schools.com/html/mov_bbb.mp4",
+  badge: "Rare Find",
+  badgeHi: "दुर्लभ खोज",
+  featured: false
+}
 ];
 
 export const blogPosts: BlogPost[] = [
