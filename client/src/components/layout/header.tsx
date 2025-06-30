@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/button';
@@ -34,6 +34,24 @@ export function Header() {
       </Link>
     );
   };
+
+  // Google Analytics gtag.js
+  useEffect(() => {
+    if (!window.gtagScriptLoaded) {
+      const script1 = document.createElement('script');
+      script1.async = true;
+      script1.src = 'https://www.googletagmanager.com/gtag/js?id=G-ZVFSSFY4Q8';
+      document.head.appendChild(script1);
+
+      const script2 = document.createElement('script');
+      script2.innerHTML = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ZVFSSFY4Q8');`;
+      document.head.appendChild(script2);
+      window.gtagScriptLoaded = true;
+    }
+  }, []);
 
   return (
     <header className="bg-white shadow-sm fixed w-full top-0 z-50">

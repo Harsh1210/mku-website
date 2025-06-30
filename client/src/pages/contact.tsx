@@ -308,13 +308,21 @@ export default function Contact() {
       {/* Map Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gray-300 h-96 rounded-lg flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="h-16 w-16 text-gray-500 mx-auto mb-4" />
-              <p className="text-gray-600 text-lg">Interactive Map Coming Soon</p>
-              <p className="text-gray-500">Visit us at our Maharashtra facility</p>
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green text-center mb-12">
+                Find Us Here
+            </h2>
+            <div className="w-full aspect-w-16 aspect-h-10 min-h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+                <iframe
+                    src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=en&amp;q=mohan krushi udyog gat no. 795 parola road&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: 400 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Mohan Krushi Udyog Location"
+                ></iframe>
             </div>
-          </div>
         </div>
       </section>
     </div>
