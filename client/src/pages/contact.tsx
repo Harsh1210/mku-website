@@ -12,7 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { z } from 'zod';
 
-// Static form schema
+// Zod schema defines the shape and validation rules for your form.
 const contactFormSchema = z.object({
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
@@ -22,7 +22,14 @@ const contactFormSchema = z.object({
   message: z.string().min(10, 'Message must be at least 10 characters'),
 });
 
+// TypeScript type derived from the Zod schema.
 type ContactFormData = z.infer<typeof contactFormSchema>;
+
+// --- IMPORTANT: CONFIGURE THESE VALUES ---
+// These should be stored securely, ideally as environment variables in your build process (e.g., using REACT_APP_ prefix).
+const LAMBDA_FUNCTION_URL = 'https://ay6eawlzimjyeukeoz33obgq3q0shcgu.lambda-url.ap-south-1.on.aws/'; // Replace with your actual Lambda Function URL.
+const CLIENT_ID = 'QikadcbGSepHiAzSFIDdxIiAFM';                     // Replace with the Client ID you set in Lambda.
+const CLIENT_SECRET = 'oHhGZpJxzrqGVndVINIQUFDrLp';             // Replace with the Client Secret you set in Lambda.
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -41,18 +48,62 @@ export default function Contact() {
     },
   });
 
+  // This function sends the validated form data to your AWS Lambda function.
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     
-    // Simulate form submission for static site
-    setTimeout(() => {
-      form.reset();
-      setIsSubmitting(false);
-      toast({
-        title: "Success!",
-        description: t('contact.form.success'),
-      });
-    }, 1000);
+    // Map your form data to the fields Odoo's CRM model expects.
+    const opportunityPayload = {
+        name: `${data.firstName} ${data.lastName} - ${data.subject}`, // Opportunity Title
+        contact_name: `${data.firstName} ${data.lastName}`,
+        email_from: data.email,
+        phone: data.phone,
+        description: data.message,
+    };
+
+    try {
+        const response = await fetch(LAMBDA_FUNCTION_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-client-id': CLIENT_ID,
+                'x-client-secret': CLIENT_SECRET
+            },
+            body: JSON.stringify(opportunityPayload),
+        });
+
+        // MODIFICATION: First, check if the response status is successful (e.g., 200, 201).
+        // The 'ok' property of the response is true for any 2xx status code.
+        if (!response.ok) {
+            // If the server returned an error code, try to parse the error message from the body.
+            const errorData = await response.json().catch(() => null); // Gracefully handle cases where error body isn't JSON.
+            throw new Error(errorData?.error || `Request failed with status ${response.status}`);
+        }
+        
+        // If we get here, the request was successful. We can now safely parse the success response.
+        const successData = await response.json();
+        console.log("Success response from Lambda:", successData);
+
+        // --- Success ---
+        toast({
+            title: "Success!",
+            description: t('contact.form.success'),
+        });
+        form.reset();
+
+    } catch (error: any) {
+        // --- Error ---
+        // This block now correctly catches network errors, JSON parsing errors,
+        // and errors thrown manually from the `if (!response.ok)` block.
+        console.error("Submission error details:", error);
+        toast({
+            variant: "destructive",
+            title: "Submission Failed",
+            description: error.message || "An unknown error occurred. See console for details.",
+        });
+    } finally {
+        setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,7 +133,6 @@ export default function Contact() {
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-sage-green bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
-                    {/* Corrected: Changed text-sage-green to text-forest-green for contrast */}
                     <MapPin className="text-forest-green h-6 w-6" />
                 </div>
                   <div>
@@ -97,7 +147,6 @@ export default function Contact() {
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-lime-green bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
-                      {/* Corrected: Changed text-lime-green to text-forest-green for contrast */}
                       <Phone className="text-forest-green h-6 w-6" />
                   </div>
                   <div>
@@ -109,8 +158,7 @@ export default function Contact() {
                 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-forest-green bg-opacity-20 rounded-full flex items-center justify-center flex-shrink-0">
-                    {/* Corrected: Changed text-forest-green to text-white for contrast */}
-                    <Mail className="text-white h-6 w-6" />
+                    <Mail className="text-forest-green h-6 w-6" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-forest-green mb-1">{t('contact.email')}</h4>
@@ -257,7 +305,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Map Section - Placeholder */}
+      {/* Map Section */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gray-300 h-96 rounded-lg flex items-center justify-center">

@@ -151,6 +151,55 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Customer Testimonials */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-4">
+              What Our Customers Say
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Real stories from farmers and families who trust our quality
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {testimonials.map((testimonial) => (
+              <Card key={testimonial.id} className="bg-gradient-to-br from-white to-mint-green/10 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 hover:scale-105 relative overflow-hidden">
+                <CardContent className="p-6">
+                  <div className="absolute top-4 right-4 text-mint-green opacity-30">
+                    <Quote className="h-8 w-8" />
+                  </div>
+                  
+                  <div className="mb-4">
+                    <h4 className="font-semibold text-forest-green">
+                      {isHindi ? testimonial.nameHi : testimonial.name}
+                    </h4>
+                    <p className="text-sm text-gray-600">
+                      {isHindi ? testimonial.roleHi : testimonial.role}
+                    </p>
+                  </div>
+                  
+                  <div className="flex mb-3">
+                    {Array.from({ length: testimonial.rating }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 text-lime-green fill-current" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-gray-700 text-sm leading-relaxed mb-4">
+                    "{isHindi ? testimonial.contentHi : testimonial.content}"
+                  </p>
+                  
+                  <p className="text-xs text-gray-500">
+                    {isHindi ? testimonial.locationHi : testimonial.location}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Featured Products */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -305,55 +354,6 @@ export default function Home() {
                 {t('blog.view_all')}
               </Button>
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Customer Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold text-forest-green mb-4">
-              What Our Customers Say
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Real stories from farmers and families who trust our quality
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {testimonials.map((testimonial) => (
-              <Card key={testimonial.id} className="bg-gradient-to-br from-white to-mint-green/10 hover:shadow-xl transition-all duration-500 rounded-2xl border-0 hover:scale-105 relative overflow-hidden">
-                <CardContent className="p-6">
-                  <div className="absolute top-4 right-4 text-mint-green opacity-30">
-                    <Quote className="h-8 w-8" />
-                  </div>
-                  
-                  <div className="mb-4">
-                    <h4 className="font-semibold text-forest-green">
-                      {isHindi ? testimonial.nameHi : testimonial.name}
-                    </h4>
-                    <p className="text-sm text-gray-600">
-                      {isHindi ? testimonial.roleHi : testimonial.role}
-                    </p>
-                  </div>
-                  
-                  <div className="flex mb-3">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-lime-green fill-current" />
-                    ))}
-                  </div>
-                  
-                  <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                    "{isHindi ? testimonial.contentHi : testimonial.content}"
-                  </p>
-                  
-                  <p className="text-xs text-gray-500">
-                    {isHindi ? testimonial.locationHi : testimonial.location}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
       </section>
