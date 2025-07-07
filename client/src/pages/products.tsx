@@ -79,7 +79,24 @@ function ProductCard({ product, isHindi, t }: any) {
   const [mediaIndex, setMediaIndex] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const media = [...(product.images || []), ...(product.video ? [product.video] : [])];
-  const isVideo = (url: string) => url.endsWith('.mp4') || url.includes('youtube.com') || url.includes('vimeo.com');
+  const isVideo = (url: string) =>
+    url.endsWith('.mp4') ||
+    url.includes('youtube.com') ||
+    url.includes('vimeo.com') ||
+    isGoogleDriveVideo(url);
+  const isGoogleDriveVideo = (url: string) =>
+    url.includes('drive.google.com/file/d/') && url.includes('/preview');
+
+  // Helper to always get the preview link for Google Drive videos
+  const getGoogleDrivePreviewUrl = (url: string) => {
+    // Accept both /uc?export=download&id=... and /file/d/.../preview
+    const match = url.match(/(?:id=|file\/d\/)([a-zA-Z0-9_-]{25,})/);
+    if (match) {
+      return `https://drive.google.com/file/d/${match[1]}/preview`;
+    }
+    return url;
+  };
+
   const handlePrev = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     setMediaIndex((prev) => (prev === 0 ? media.length - 1 : prev - 1));
@@ -113,12 +130,21 @@ function ProductCard({ product, isHindi, t }: any) {
               </>
             )}
             {isVideo(media[mediaIndex]) ? (
-              <video
-                src={media[mediaIndex]}
-                controls
-                className="w-full h-40 sm:h-48 object-cover rounded-xl shadow-md"
-                onClick={e => { e.stopPropagation(); setModalOpen(true); }}
-              />
+              isGoogleDriveVideo(media[mediaIndex]) ? (
+                <iframe
+                  src={getGoogleDrivePreviewUrl(media[mediaIndex])}
+                  allow="autoplay"
+                  className="w-full h-40 sm:h-48 object-cover rounded-xl shadow-md"
+                  title="Google Drive Video"
+                />
+              ) : (
+                <video
+                  src={media[mediaIndex]}
+                  controls
+                  className="w-full h-40 sm:h-48 object-cover rounded-xl shadow-md"
+                  onClick={e => { e.stopPropagation(); setModalOpen(true); }}
+                />
+              )
             ) : (
               <img
                 src={media[mediaIndex]}
@@ -169,12 +195,22 @@ function ProductCard({ product, isHindi, t }: any) {
                 </>
               )}
               {isVideo(media[mediaIndex]) ? (
-                <video
-                  src={media[mediaIndex]}
-                  controls
-                  autoPlay
-                  className="max-h-[80vh] rounded-xl shadow-lg"
-                />
+                isGoogleDriveVideo(media[mediaIndex]) ? (
+                  <iframe
+                    src={getGoogleDrivePreviewUrl(media[mediaIndex])}
+                    allow="autoplay"
+                    className="w-full max-h-[80vh] rounded-xl shadow-lg"
+                    style={{ minHeight: 400 }}
+                    title="Google Drive Video"
+                  />
+                ) : (
+                  <video
+                    src={media[mediaIndex]}
+                    controls
+                    autoPlay
+                    className="max-h-[80vh] rounded-xl shadow-lg"
+                  />
+                )
               ) : (
                 <img
                   src={media[mediaIndex]}
