@@ -64,8 +64,8 @@ gtag('config', 'G-ZVFSSFY4Q8');`;
                   src="https://sadabahaar-167866605.imgix.net/mku-logo.png?auto=format&w=60&h=60"
                   alt="Mohan Krushi Udyog Logo"
                   className="h-8 w-8 mr-2"
-                   />
-                <span className="text-xl lg:text-2xl font-playfair font-bold text-forest-green">
+                />
+                <span className="text-xl lg:text-2xl font-playfair font-bold text-forest-green whitespace-nowrap">
                   Mohan Krushi Udyog
                 </span>
               </span>
