@@ -57,15 +57,15 @@ gtag('config', 'G-ZVFSSFY4Q8');`;
     <header className="bg-white shadow-sm fixed w-full top-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
-          <div className="flex items-center">
+          <div className="flex items-center min-w-0">
             <Link href="/">
-              <span className="flex-shrink-0 flex items-center cursor-pointer">
+              <span className="flex-shrink-0 flex items-center cursor-pointer overflow-x-auto pr-1">
                 <img
                   src="https://sadabahaar-167866605.imgix.net/mku-logo.png?auto=format&w=60&h=60"
                   alt="Mohan Krushi Udyog Logo"
                   className="h-8 w-8 mr-2"
                 />
-                <span className="text-xl lg:text-2xl font-playfair font-bold text-forest-green whitespace-nowrap">
+                <span className="text-base sm:text-xl lg:text-2xl font-playfair font-bold text-forest-green whitespace-nowrap">
                   Mohan Krushi Udyog
                 </span>
               </span>
