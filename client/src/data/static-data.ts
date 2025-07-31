@@ -548,7 +548,7 @@ export const blogPosts: BlogPost[] = [
     category: "Nutrition",
     categoryHi: "पोषण",
     image: "https://sadabahaar-167866605.imgix.net/power-of-pulses-min.png",
-    publishedAt: new Date("2024-07-26"),
+    publishedAt: new Date("2025-07-03"),
     featured: true,
   },
   {
@@ -789,7 +789,7 @@ export const blogPosts: BlogPost[] = [
     categoryHi: "प्रौद्योगिकी",
     image: "https://sadabahaar-167866605.imgix.net/cold-storage.png",
     video: "https://drive.google.com/file/d/1lyFPmlP_mRSgWWQJyBdP-kj8Ogeudmod/preview",
-    publishedAt: new Date("2025-01-15"),
+    publishedAt: new Date("2025-08-01"),
     featured: true,
   },
 ];
