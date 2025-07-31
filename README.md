@@ -151,115 +151,211 @@ This website uses static data files for content management:
 
 #### 1. Adding a New Blog Post
 
-To add a new blog post, edit `client/src/data/static-data.ts` and add a new entry to the `blogPosts` array:
+The blog system uses a structured content format with different content block types for better formatting and rendering. To add a new blog post, edit `client/src/data/static-data.ts` and add a new entry to the `blogPosts` array:
 
 ```typescript
 {
-  id: 11, // Use the next available ID
-  title: "Your Blog Title",
-  titleHi: "आपका ब्लॉग शीर्षक", // Hindi translation
-  excerpt: "Brief description of your blog post...",
-  excerptHi: "आपके ब्लॉग पोस्ट का संक्षिप्त विवरण...",
-  content: "Full content of your blog post. You can include multiple paragraphs by separating them with double line breaks.\n\nThis will be displayed as separate paragraphs on the blog post page.",
-  contentHi: "आपके ब्लॉग पोस्ट की पूरी सामग्री...",
-  category: "Technology", // Choose from existing categories or add new ones
-  categoryHi: "प्रौद्योगिकी",
-  image: "https://images.unsplash.com/photo-example", // Image URL
-  publishedAt: new Date("2024-06-23"), // Publication date
-  featured: false, // Set to true for featured posts
+  id: 2, // Use the next available ID (increment from the last post)
+  title: "Your Blog Title in English",
+  titleHi: "आपके ब्लॉग का हिंदी शीर्षक", // Hindi translation of title
+  excerpt: "Brief summary of your blog post in English (2-3 sentences max)",
+  excerptHi: "आपके ब्लॉग पोस्ट का हिंदी में संक्षिप्त विवरण", // Hindi translation of excerpt
+  
+  // STRUCTURED CONTENT - Use these content block types:
+  content: [
+    {
+      type: 'paragraph',
+      content: 'Your introductory paragraph text goes here. This is for regular content blocks.'
+    },
+    {
+      type: 'heading', 
+      content: 'Your Main Section Heading' // Will render as large heading (h2)
+    },
+    {
+      type: 'paragraph',
+      content: 'Another paragraph with detailed information about your topic.'
+    },
+    {
+      type: 'subheading',
+      content: 'Your Subsection Heading' // Will render as medium heading (h3)
+    },
+    {
+      type: 'list',
+      content: 'Optional intro text for the list:', // Optional description before list
+      items: [
+        'First list item',
+        'Second list item',
+        'Item with Bold Text: Use colon to make text before colon bold',
+        'Another item'
+      ]
+    },
+    {
+      type: 'paragraph',
+      content: 'Concluding paragraph or additional content.'
+    }
+  ],
+  
+  // Hindi content follows the same structure
+  contentHi: [
+    {
+      type: 'paragraph',
+      content: 'आपका परिचयात्मक पैराग्राफ यहाँ जाता है।'
+    },
+    {
+      type: 'heading',
+      content: 'आपका मुख्य अनुभाग शीर्षक'
+    }
+    // ... same structure as English content but with Hindi translations
+  ],
+  
+  category: "Nutrition", // e.g., "Nutrition", "Agriculture", "Health", "Technology"
+  categoryHi: "पोषण", // Hindi translation of category
+  image: "https://your-image-url.com/image.jpg", // Featured image URL
+  publishedAt: new Date("2024-07-26"), // Publication date
+  featured: true, // true for featured posts, false otherwise
 }
 ```
 
-#### 2. Adding Images to Blog Posts
+#### 2. Content Block Types
+
+The blog system supports four types of content blocks:
+
+- **`paragraph`**: For regular text content
+- **`heading`**: For main section headings (renders as large h2 headings)
+- **`subheading`**: For subsection headings (renders as medium h3 headings)
+- **`list`**: For bulleted lists with optional intro text and automatic bold formatting for items with colons
+
+#### 3. Quick Blog Addition Prompt
+
+For easy blog addition, use this prompt with GitHub Copilot or any AI assistant:
+
+```
+I want to add a new blog post. Here's the content: [PASTE_YOUR_CONTENT_HERE]
+
+Please create a suitable title, format the content using the blog structure with 
+headings, paragraphs, and lists as appropriate. Add both English and Hindi versions 
+(you can add placeholder text for Hindi that I'll translate later). Use the next 
+available ID number and set appropriate category and publication date.
+```
+
+#### 4. Content Formatting Guidelines
+
+**Paragraphs**: Each paragraph should be a separate content block
+**Headings**: Use `heading` type for main sections, `subheading` for subsections
+**Lists**: Use when you have multiple related points or items
+**Bold Text in Lists**: Text before a colon (`:`) in list items will automatically be bold
+
+#### 5. Adding Images to Blog Posts
 
 **Option A: Using External Image URLs (Recommended)**
 - Use high-quality images from Unsplash, Pexels, or your own hosting
 - Ensure images are at least 800x500px for best quality
 - Use HTTPS URLs for security
+- Example: `"https://images.unsplash.com/photo-1234567890"`
 
-**Option B: Using Local Images**
-1. Create an `assets` folder: `client/src/assets/images/`
-2. Add your images to this folder
-3. Import and reference them:
-```typescript
-// At the top of static-data.ts
-import blogImage1 from '@/assets/images/blog-image-1.jpg';
+**Option B: Using Your Own Hosted Images**
+- Upload images to your image hosting service
+- Use the direct URL in the `image` field
 
-// In your blog post data
-image: blogImage1,
-```
-
-#### 3. Adding Videos to Blog Posts
-
-Videos can be embedded in the blog content using HTML:
-
-```typescript
-content: `Your blog introduction paragraph.
-
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 20px 0;">
-  <iframe 
-    src="https://www.youtube.com/embed/VIDEO_ID" 
-    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" 
-    allowfullscreen>
-  </iframe>
-</div>
-
-Continue with your blog content after the video.`,
-```
-
-#### 4. Blog Categories
+#### 6. Blog Categories
 
 Current available categories:
-- Sustainability, Nutrition, Community, Health, Quality
-- Technology, Lifestyle, Environment, Economics, Future
+- **Agriculture**: कृषि
+- **Nutrition**: पोषण  
+- **Health**: स्वास्थ्य
+- **Technology**: प्रौद्योगिकी
+- **Sustainability**: स्थिरता
+- **Community**: समुदाय
+- **Economics**: अर्थशास्त्र
 
-To add a new category:
-1. Add the category to your blog post data
-2. Update translations in `client/src/locales/en.json` and `client/src/locales/hi.json`:
-```json
-"blog": {
-  "categories": {
-    "your_new_category": "Your New Category"
+To add a new category, simply use it in your blog post and add the translation to both `client/src/locales/en.json` and `client/src/locales/hi.json`.
+
+#### 7. Best Practices for Blog Content
+
+**Content Structure**: Use headings to break up long content into digestible sections
+**Paragraph Length**: Keep paragraphs focused and not too long (3-5 sentences)
+**Lists**: Use lists for enumerating benefits, steps, or multiple related points
+**Images**: Use relevant, high-quality images that support your content
+**Categories**: Choose existing categories or create relevant new ones
+**Publishing Dates**: Use realistic dates for better organization
+**Hindi Translations**: Always provide Hindi translations for accessibility
+
+#### 8. Example Blog Structure
+
+```typescript
+content: [
+  {
+    type: 'paragraph',
+    content: 'Introduction paragraph explaining the topic...'
+  },
+  {
+    type: 'heading',
+    content: 'Main Benefits'
+  },
+  {
+    type: 'paragraph',
+    content: 'Explanation of the benefits...'
+  },
+  {
+    type: 'list',
+    content: 'Key advantages include:',
+    items: [
+      'First advantage: Detailed explanation',
+      'Second advantage: More details',
+      'Third advantage: Additional info'
+    ]
+  },
+  {
+    type: 'heading',
+    content: 'How to Implement'
+  },
+  {
+    type: 'paragraph',
+    content: 'Step-by-step explanation...'
+  },
+  {
+    type: 'subheading',
+    content: 'Important Considerations'
+  },
+  {
+    type: 'paragraph',
+    content: 'Additional important information...'
+  },
+  {
+    type: 'paragraph',
+    content: 'Concluding thoughts and call to action...'
   }
-}
+]
 ```
-3. Update the categories array in `client/src/pages/blog.tsx`
 
-#### 5. Best Practices for Blog Content
-
-**Content Length**: Aim for 200-500 words for meaningful content
-**Paragraphs**: Separate paragraphs with `\n\n` in the content string
-**Images**: Use 16:9 aspect ratio images (800x450px recommended)
-**Categories**: Keep categories consistent and relevant
-**Publishing Dates**: Use realistic dates for better SEO
-**Hindi Translations**: Always provide Hindi translations for better accessibility
-
-#### 6. After Adding Content
+#### 9. After Adding Content
 
 1. **Test Locally**: Run `npm run dev` to test your changes
 2. **Build**: Run `npm run build` to ensure no errors
 3. **Deploy**: Use `npm run deploy` to update your live site
 
-#### 7. Content Ideas for Agricultural Blog
+#### 10. Content Ideas for Agricultural Blog
 
-- Seasonal farming tips
-- Crop rotation techniques
-- Sustainable farming practices
-- Market price updates
-- Weather impact on crops
-- New agricultural technologies
-- Farmer success stories
-- Nutrition facts about grains
-- Food safety and storage tips
-- Government schemes for farmers
+- Seasonal farming tips and crop management
+- Sustainable farming practices and techniques
+- Nutrition facts about different pulses and grains
+- Market insights and price trends
+- Weather impact on agriculture
+- Success stories from farmers
+- Food safety and storage guidelines
+- Government schemes and support for farmers
+- Modern agricultural technologies
+- Health benefits of organic farming
 
-#### 8. SEO Optimization
+#### 11. SEO Optimization Tips
 
 - Use descriptive titles with relevant keywords
-- Write compelling excerpts that summarize the post
-- Include relevant categories
-- Use high-quality, relevant images
+- Write compelling excerpts that summarize the post effectively  
+- Choose appropriate categories for better organization
+- Use high-quality, relevant featured images
+- Structure content with proper headings for better readability
 - Publish content regularly for better engagement
+- Include both English and Hindi versions for wider reach
 
 To update content, edit these files and redeploy.
 

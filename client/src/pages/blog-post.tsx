@@ -1,15 +1,18 @@
 import { useTranslation } from 'react-i18next';
 import { useRoute } from 'wouter';
-import { ArrowLeft, Calendar, Tag, User } from 'lucide-react';
+import { ArrowLeft, Calendar, Tag, User, ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { blogPosts } from '@/data/static-data';
 import { Link } from 'wouter';
+import BlogContentRenderer from '@/components/BlogContentRenderer';
+import { useState } from 'react';
 
 export default function BlogPost() {
   const { t, i18n } = useTranslation();
   const isHindi = i18n.language === 'hi';
   const [match, params] = useRoute('/blog/:id');
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
   
   if (!match) return null;
   
@@ -78,32 +81,92 @@ export default function BlogPost() {
         </div>
       </div>
 
-      {/* Featured Image */}
-      {post.image && (
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 mb-12">
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-            <img
-              src={post.image}
-              alt={title}
-              className="w-full h-64 md:h-96 object-cover"
-            />
+      {/* Featured Media Carousel */}
+      {(post.image || post.video) && (
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 mb-12">
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden relative">
+            {/* Media Content */}
+            <div className="relative">
+              {currentMediaIndex === 0 && post.image && (
+                <img
+                  src={post.image}
+                  alt={title}
+                  className="w-full h-64 md:h-96 object-cover"
+                />
+              )}
+              {currentMediaIndex === 1 && post.video && (
+                <div className="relative w-full h-64 md:h-96">
+                  <iframe
+                    src={post.video}
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    title={`${title} - Video`}
+                  />
+                </div>
+              )}
+              
+              {/* Navigation Arrows - Only show if both image and video exist */}
+              {post.image && post.video && (
+                <>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white/90 text-gray-800 rounded-full shadow-lg"
+                    onClick={() => setCurrentMediaIndex(currentMediaIndex === 0 ? 1 : 0)}
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white/90 text-gray-800 rounded-full shadow-lg"
+                    onClick={() => setCurrentMediaIndex(currentMediaIndex === 0 ? 1 : 0)}
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </Button>
+                </>
+              )}
+              
+              {/* Media Type Indicator */}
+              {post.image && post.video && (
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 bg-black/50 rounded-full px-3 py-1">
+                  <button
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      currentMediaIndex === 0 ? 'bg-white' : 'bg-white/50'
+                    }`}
+                    onClick={() => setCurrentMediaIndex(0)}
+                  />
+                  <button
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      currentMediaIndex === 1 ? 'bg-white' : 'bg-white/50'
+                    }`}
+                    onClick={() => setCurrentMediaIndex(1)}
+                  />
+                </div>
+              )}
+              
+              {/* Video Play Icon Overlay (only for image when video exists) */}
+              {currentMediaIndex === 0 && post.video && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="bg-black/50 hover:bg-black/60 text-white rounded-full p-4 transform hover:scale-110 transition-all"
+                    onClick={() => setCurrentMediaIndex(1)}
+                  >
+                    <Play className="h-8 w-8 ml-1" />
+                  </Button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
 
       {/* Content */}
       <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="prose prose-lg max-w-none">
-          <div className="text-lg leading-relaxed text-gray-700 space-y-6">
-            {content.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="mb-6">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        {/* Author Bio */}
+          <BlogContentRenderer content={content} />        {/* Author Bio */}
         <div className="mt-16 p-8 bg-gradient-to-br from-sage-50 to-mint-50 rounded-2xl">
           <div className="flex items-start gap-4">
             <div className="w-16 h-16 bg-forest-green rounded-full flex items-center justify-center">
